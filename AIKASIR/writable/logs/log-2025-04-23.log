@@ -1,0 +1,120 @@
+CRITICAL - 2025-04-23 12:36:21 --> CodeIgniter\Router\Exceptions\RouterException: The namespace delimiter is a backslash (\), not a slash (/). Route handler: "\App\Controllers\Kasir/Main::index"
+[Method: GET, Route: Kasir]
+in SYSTEMPATH\Router\Router.php on line 494.
+ 1 SYSTEMPATH\Router\Router.php(494): CodeIgniter\Router\Exceptions\RouterException::forInvalidControllerName('\\App\\Controllers\\Kasir/Main::index')
+ 2 SYSTEMPATH\Router\Router.php(213): CodeIgniter\Router\Router->checkRoutes('Kasir')
+ 3 SYSTEMPATH\CodeIgniter.php(832): CodeIgniter\Router\Router->handle('Kasir')
+ 4 SYSTEMPATH\CodeIgniter.php(455): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\AIKASIR\\public\\index.php')
+ERROR - 2025-04-23 12:45:37 --> Error connecting to the database: mysqli_sql_exception: Access denied for user ''@'localhost' (using password: YES) in C:\laragon\www\AIKASIR\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\laragon\www\AIKASIR\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', '', Object(SensitiveParameterValue), '', 3306, '', 0)
+#1 C:\laragon\www\AIKASIR\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\laragon\www\AIKASIR\system\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\laragon\www\AIKASIR\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\laragon\www\AIKASIR\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\AIKASIR\system\BaseModel.php(713): CodeIgniter\Model->doFirst()
+#6 C:\laragon\www\AIKASIR\app\Controllers\Kasir\KasirApi.php(19): CodeIgniter\BaseModel->first()
+#7 C:\laragon\www\AIKASIR\system\CodeIgniter.php(933): App\Controllers\Kasir\KasirApi->login()
+#8 C:\laragon\www\AIKASIR\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Kasir\KasirApi))
+#9 C:\laragon\www\AIKASIR\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\AIKASIR\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\AIKASIR\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\AIKASIR\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 C:\laragon\www\AIKASIR\system\rewrite.php(44): require_once('C:\\laragon\\www\\...')
+#14 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user ''@'localhost' (using password: YES) in C:\laragon\www\AIKASIR\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\laragon\www\AIKASIR\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\laragon\www\AIKASIR\system\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\laragon\www\AIKASIR\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\laragon\www\AIKASIR\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\laragon\www\AIKASIR\system\BaseModel.php(713): CodeIgniter\Model->doFirst()
+#5 C:\laragon\www\AIKASIR\app\Controllers\Kasir\KasirApi.php(19): CodeIgniter\BaseModel->first()
+#6 C:\laragon\www\AIKASIR\system\CodeIgniter.php(933): App\Controllers\Kasir\KasirApi->login()
+#7 C:\laragon\www\AIKASIR\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Kasir\KasirApi))
+#8 C:\laragon\www\AIKASIR\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\AIKASIR\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#10 C:\laragon\www\AIKASIR\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 C:\laragon\www\AIKASIR\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 C:\laragon\www\AIKASIR\system\rewrite.php(44): require_once('C:\\laragon\\www\\...')
+#13 {main}
+CRITICAL - 2025-04-23 12:45:37 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user ''@'localhost' (using password: YES)
+[Method: POST, Route: api/login]
+in SYSTEMPATH\Database\BaseConnection.php on line 467.
+ 1 SYSTEMPATH\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `users`
+WHERE `username` = :username:
+AND `password` = :password:
+ LIMIT 1', [...], false)
+ 3 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(713): CodeIgniter\Model->doFirst()
+ 5 APPPATH\Controllers\Kasir\KasirApi.php(19): CodeIgniter\BaseModel->first()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Kasir\KasirApi->login()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Kasir\KasirApi))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\AIKASIR\\public\\index.php')
+ERROR - 2025-04-23 12:47:09 --> Error connecting to the database: mysqli_sql_exception: Access denied for user ''@'localhost' (using password: YES) in C:\laragon\www\AIKASIR\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\laragon\www\AIKASIR\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', '', Object(SensitiveParameterValue), '', 3306, '', 0)
+#1 C:\laragon\www\AIKASIR\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\laragon\www\AIKASIR\system\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\laragon\www\AIKASIR\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\laragon\www\AIKASIR\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\AIKASIR\system\BaseModel.php(713): CodeIgniter\Model->doFirst()
+#6 C:\laragon\www\AIKASIR\app\Controllers\Kasir\KasirApi.php(19): CodeIgniter\BaseModel->first()
+#7 C:\laragon\www\AIKASIR\system\CodeIgniter.php(933): App\Controllers\Kasir\KasirApi->login()
+#8 C:\laragon\www\AIKASIR\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Kasir\KasirApi))
+#9 C:\laragon\www\AIKASIR\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\AIKASIR\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#11 C:\laragon\www\AIKASIR\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\laragon\www\AIKASIR\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 C:\laragon\www\AIKASIR\system\rewrite.php(44): require_once('C:\\laragon\\www\\...')
+#14 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user ''@'localhost' (using password: YES) in C:\laragon\www\AIKASIR\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\laragon\www\AIKASIR\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\laragon\www\AIKASIR\system\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\laragon\www\AIKASIR\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\laragon\www\AIKASIR\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\laragon\www\AIKASIR\system\BaseModel.php(713): CodeIgniter\Model->doFirst()
+#5 C:\laragon\www\AIKASIR\app\Controllers\Kasir\KasirApi.php(19): CodeIgniter\BaseModel->first()
+#6 C:\laragon\www\AIKASIR\system\CodeIgniter.php(933): App\Controllers\Kasir\KasirApi->login()
+#7 C:\laragon\www\AIKASIR\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Kasir\KasirApi))
+#8 C:\laragon\www\AIKASIR\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\AIKASIR\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#10 C:\laragon\www\AIKASIR\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 C:\laragon\www\AIKASIR\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 C:\laragon\www\AIKASIR\system\rewrite.php(44): require_once('C:\\laragon\\www\\...')
+#13 {main}
+CRITICAL - 2025-04-23 12:47:09 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user ''@'localhost' (using password: YES)
+[Method: POST, Route: api/login]
+in SYSTEMPATH\Database\BaseConnection.php on line 467.
+ 1 SYSTEMPATH\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `users`
+WHERE `username` = :username:
+AND `password` = :password:
+ LIMIT 1', [...], false)
+ 3 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(713): CodeIgniter\Model->doFirst()
+ 5 APPPATH\Controllers\Kasir\KasirApi.php(19): CodeIgniter\BaseModel->first()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Kasir\KasirApi->login()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Kasir\KasirApi))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\AIKASIR\\public\\index.php')

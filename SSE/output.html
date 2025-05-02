@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Terima Data Realtime</title>
+</head>
+<body>
+  <h1>Data Terbaru:</h1>
+  <pre id="output">Menunggu data...</pre>
+
+  <script>
+    const output = document.getElementById("output");
+    const eventSource = new EventSource("sse.php");
+
+    eventSource.onmessage = function(event) {
+      output.textContent = event.data;
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Absensi Face Recognition</title>
+  <!-- Pastikan URL CDN face-api.js benar -->
+  <script defer src="https://cdn.jsdelivr.net/npm/face-api.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #2e8bff, #6b73ff);
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      margin-top: 2rem;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 1rem;
+      padding: 2rem;
+      margin-top: 2rem;
+      width: 90%;
+      max-width: 600px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    video {
+      border-radius: 1rem;
+      width: 100%;
+      height: auto;
+      margin-bottom: 1rem;
+    }
+
+    .status {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #aaffaa;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Absensi Wajah</h1>
+  <div class="container">
+    <video id="video" autoplay muted></video>
+    <div class="status" id="status">Menunggu deteksi wajah...</div>
+  </div>
+
+  <script>
+    const video = document.getElementById('video');
+    const statusDiv = document.getElementById('status');
+
+    // Start camera access
+    async function startCamera() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        video.srcObject = stream;
+      } catch (err) {
+        statusDiv.innerText = 'Gagal mengakses kamera: ' + err.message;
+        console.error('Kamera error:', err);
+      }
+    }
+
+    // Load face-api.js models
+    async function loadModels() {
+      const MODEL_URL = 'https://cdn.jsdelivr.net/npm/face-api.js/models';
+      await faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL);
+      await faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL);
+      await faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL);
+      statusDiv.innerText = 'Model berhasil dimuat! Menunggu deteksi wajah...';
+    }
+
+    // Start face recognition
+    async function startFaceRecognition() {
+      await loadModels();
+      await startCamera();
+
+      video.addEventListener('play', () => {
+        const canvas = faceapi.createCanvasFromMedia(video);
+        document.querySelector('.container').append(canvas);
+        const displaySize = { width: video.width, height: video.height };
+        faceapi.matchDimensions(canvas, displaySize);
+
+        setInterval(async () => {
+          const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions());
+          const resized = faceapi.resizeResults(detections, displaySize);
+          canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+          faceapi.draw.drawDetections(canvas, resized);
+
+          if (detections.length > 0) {
+            statusDiv.innerText = `Wajah terdeteksi - ${detections.length} orang`;
+          } else {
+            statusDiv.innerText = 'Tidak ada wajah terdeteksi.';
+          }
+        }, 1000);
+      });
+    }
+
+    // Call the function to start face recognition
+    startFaceRecognition();
+  </script>
+</body>
+</html>
